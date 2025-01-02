@@ -1,0 +1,475 @@
+
+/*** Start Global ***/
+
+    :root {
+        --main-color: #0b1b3b;
+        --secondary-color: #9d7a2f;
+        --third-color: #f6ebd1;
+        --fourth-color: #FFF;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--main-color);
+    }
+
+    ::selection {
+        background-color: var(--main-color);
+        color: var(--fourth-color);
+    }
+
+    @font-face {
+        font-family: 'Scandia';
+        src: url('../webfonts/Scandia-Medium.woff');
+    }
+
+    body {
+        font-family: 'Scandia', sans-serif;
+    }
+
+    .correct-icon {
+        background: green;
+        color: var(--fourth-color);
+        border-radius: 50%;
+        height: 22px !important;
+        width: 22px !important;
+        padding: 2px;
+    }
+
+    .un-correct-icon {
+        background: red;
+        color: var(--fourth-color);
+        border-radius: 50%;
+        height: 22px !important;
+        width: 22px !important;
+        padding: 2px;
+    }
+
+    .custom-alert {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 10px;
+    }
+
+    input + span.error-message, select + span.error-message,
+    textarea + span.error-message, .label-select2 span.error-message {
+        position: absolute;
+        color: #dc3545;
+        font-size: 15px;
+        margin: 5px 5px 0 0;
+    }
+
+/*** End Global ***/
+
+
+/*** Start Header ***/
+
+    .header.header-sticky {
+        border: none;
+        background: transparent;
+    }
+
+    .header.header-sticky .container-fluid {
+        background: var(--main-color);
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .icon:not(.icon-c-s):not(.icon-custom-size).icon-lg {
+        color: var(--fourth-color);
+        box-shadow: 0 0 10px var(--fourth-color);
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+    }
+
+/*** End Header ***/
+
+
+/*** Start Datatable ***/
+
+    div.dataTables_wrapper div.dataTables_filter input:focus,
+    select.form-control-sm:not([size]):not([multiple]):focus {
+        box-shadow: none !important;
+        border: 1px solid var(--main-color) !important;
+    }
+
+    .page-item:not(:first-child) .page-link,
+    .page-item:first-child .page-link {
+        box-shadow: none !important;
+        color: var(--main-color);
+    }
+
+    .page-item.active .page-link {
+        background-color: var(--main-color);
+        border-color: var(--main-color);
+        color: var(--fourth-color);
+    }
+
+    .page-item.active .page-link:focus {
+        box-shadow: none !important;
+    }
+
+    div.dataTables_wrapper div.dataTables_info {
+        padding-top: 5px;
+    }
+
+/*** End Datatable ***/
+
+
+/*** Start Sidebar ***/
+
+    .sidebar {
+        background: var(--main-color);
+    }
+
+    .sidebar .sidebar-brand {
+        height: 70px;
+        background: var(--third-color);
+    }
+
+    .sidebar .sidebar-brand .sidebar-brand-full,
+    .sidebar .sidebar-brand .sidebar-brand-full .logo {
+        width: 100%;
+        height: 100%;
+    }
+
+/*** End Sidebar ***/
+
+
+/*** Start Icons Options ***/
+
+    .actions {
+        display: flex;
+    }
+
+    .actions .edit svg {
+        color: var(--fourth-color);
+        background: #0b1b3bc4;
+        height: 30px !important;
+        width: 30px !important;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 0 10px;
+    }
+
+    .actions .show svg {
+        color: var(--fourth-color);
+        background: #9d7a2fbf;
+        height: 30px !important;
+        width: 30px !important;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    .actions button {
+        background: transparent;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .actions button:hover, .actions button:focus {
+        background: transparent !important;
+    }
+
+    .actions .delete svg {
+        color: var(--fourth-color);
+        background: #e55353d9 !important;
+        height: 30px !important;
+        width: 30px !important;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    .actions .modal button {
+        color: var(--fourth-color);
+        background: var(--main-color) !important;
+        height: 35px !important;
+        width: 70px !important;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+/*** End Icons Options ***/
+
+
+/*** Start Tabs ***/
+
+    .nav-tabs .nav-link,
+    .nav-tabs .nav-link:hover,
+    .nav-tabs .nav-link:focus {
+        color: var(--main-color);
+    }
+
+/*** End Tabs ***/
+
+
+/*** Start Custom Table ***/
+
+    .table-custom tbody tr:first-of-type th,
+    .table-custom tbody tr:first-of-type td {
+        border-top: 0;
+    }
+
+    .table-custom tbody tr:last-of-type th,
+    .table-custom tbody tr:last-of-type td {
+        border-bottom: 0;
+    }
+
+/*** End Custom Table ***/
+
+
+/*** Start Main Channels ***/
+
+    /*** Start Show ***/
+
+        .show-team .channel,
+        .show-team .member {
+            background: var(--secondary-color);
+            color: var(--fourth-color);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+
+        .show-team .member {
+            display: flex;
+            align-items: center;
+        }
+
+        .show-team .member p {
+            padding: 0;
+            margin: 0;
+        }
+
+        .show-team .member p.group {
+            background: var(--main-color);
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-left: 15px;
+        }
+
+        .show-team .channel a,
+        .show-team .member a {
+            color: var(--fourth-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--fourth-color);
+        }
+
+        .show-team .channel-logo {
+            width: 150px;
+            height: 100px;
+        }
+
+    /*** End Show ***/
+
+/*** End Main Channels ***/
+
+
+/*** Start Sub Channels ***/
+
+    /*** Start Show ***/
+
+        .show-communities .channel,
+        .show-communities .member {
+            background: var(--secondary-color);
+            color: var(--fourth-color);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+
+        .show-communities .member {
+            display: flex;
+            align-items: center;
+        }
+
+        .show-communities .member p {
+            padding: 0;
+            margin: 0;
+        }
+
+        .show-communities .member p.group {
+            background: var(--main-color);
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-left: 15px;
+        }
+
+        .show-communities .channel a,
+        .show-communities .member a {
+            color: var(--fourth-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--fourth-color);
+        }
+
+        .show-communities .channel-logo {
+            width: 150px;
+            height: 100px;
+        }
+
+    /*** End Show ***/
+
+/*** End Sub Channels ***/
+
+
+/*** Start Sub Sub Channels ***/
+
+    /*** Start Show ***/
+
+        .show-sub-communities .channel,
+        .show-sub-communities .member {
+            background: var(--secondary-color);
+            color: var(--fourth-color);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+
+        .show-sub-communities .member {
+            display: flex;
+            align-items: center;
+        }
+
+        .show-sub-communities .member p {
+            padding: 0;
+            margin: 0;
+        }
+
+        .show-sub-communities .member p.group {
+            background: var(--main-color);
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-left: 15px;
+        }
+
+        .show-sub-communities .channel a,
+        .show-sub-communities .member a {
+            color: var(--fourth-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--fourth-color);
+        }
+
+        .show-sub-communities .channel-logo {
+            width: 150px;
+            height: 100px;
+        }
+
+    /*** End Show ***/
+
+/*** End Sub Sub Channels ***/
+
+
+/*** Start Show User ***/
+
+    .show-users-data .channel {
+        background: var(--secondary-color);
+        color: var(--fourth-color);
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .show-users-data .channel p {
+        padding: 0;
+        margin: 0;
+    }
+
+    .show-users-data .channel p.user-group {
+        background: var(--main-color);
+        padding: 5px 10px;
+        border-radius: 10px;
+        font-size: 13px;
+        margin-left: 15px;
+    }
+
+    .show-users-data .channel a {
+        color: var(--fourth-color);
+        text-decoration: none;
+        border-bottom: 1px solid var(--fourth-color);
+    }
+
+    .show-users-data .profile-image {
+        width: 250px;
+        height: 150px;
+    }
+
+/*** End Show User ***/
+
+
+/*** Start Global Form ***/
+
+    .custom-form .form {
+        background: #fff0;
+        box-shadow: 0 0 10px var(--main-color);
+        padding: 25px;
+        border-radius: 15px;
+    }
+
+    .custom-form .form-title {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--main-color);
+    }
+
+    .custom-form .form label {
+        width: 95%;
+    }
+
+    .custom-form .form-input {
+        margin-top: 15px;
+        border: none;
+        border-bottom: 1px solid #c3c3c3;
+    }
+
+    .custom-form select {
+        margin-top: 14px;
+    }
+
+    .custom-form .form-submit {
+        width: 150px;
+        margin: 20px auto 0;
+        background: var(--secondary-color);
+        color: var(--fourth-color);
+        border: 1px solid var(--secondary-color);
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+/*** End Global Form ***/
+
+
+/*** Start Plan ***/
+
+    /*** Start Index ***/
+
+        .create-plan-container {
+            text-align: right;
+            margin-bottom: 30px;
+        }
+
+        .create-plan-container a {
+            text-decoration: none;
+            color: var(--fourth-color);
+            background: var(--main-color);
+            padding: 15px 40px;
+            border-radius: 10px;
+        }
+
+    /*** End Index ***/
+
+/*** End Plan ***/

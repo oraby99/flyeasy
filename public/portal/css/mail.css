@@ -1,0 +1,91 @@
+
+/*** Start Global ***/
+
+    :root {
+        --main-color: #0b1b3b;
+        --secondary-color: #9d7a2f;
+        --third-color: #f6ebd1;
+        --fourth-color: #FFF;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--main-color);
+    }
+
+    ::selection {
+        background-color: var(--main-color);
+        color: var(--fourth-color);
+    }
+
+    @font-face {
+        font-family: 'Scandia';
+        src: url('../webfonts/Scandia-Medium.woff');
+    }
+
+    body {
+        font-family: 'Scandia', sans-serif;
+    }
+
+/*** End Global ***/
+
+
+/*** Start Registration Verification ***/
+
+    .registration-verification {
+        padding: 50px 20px;
+        box-shadow: 0 0 10px var(--main-color);
+        border-radius: 10px;
+    }
+
+    .registration-verification .logo {
+        margin-bottom: 20px;
+    }
+
+    .registration-verification .verification-code {
+        margin-bottom: 30px;
+    }
+
+    .registration-verification .verification-code h3 {
+        color: var(--main-color);
+        font-weight: bold;
+    }
+
+    .registration-verification .verification-code p {
+        background: var(--secondary-color);
+        color: var(--fourth-color);
+        padding: 15px 25px;
+        font-size: 20px;
+        letter-spacing: 10px;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+
+    /*** Start Responsive ***/
+
+        @media (max-width: 440px) {
+
+            .registration-verification .verification-code span {
+                font-size: 13px;
+            }
+
+        }
+
+        @media (max-width: 400px) {
+
+            .registration-verification .verification-code h3 {
+                font-size: 20px;
+            }
+
+        }
+
+    /*** End Responsive ***/
+
+/*** End Registration Verification ***/
