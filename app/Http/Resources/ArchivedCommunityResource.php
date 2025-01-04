@@ -22,7 +22,7 @@ public function toArray(Request $request): array
         return [
             'id'                => $channel->id,
             'name'              => $channel->name,
-            'logo'              => $channel->logo == null ? asset('admin/images/OIG__36_-removebg.png') : asset('storage/' . $channel->logo),
+            'logo'              => $channel->logo == null ? asset('admin/images/OIG__36_-removebg.png') : url('storage/app/' . $channel->logo),
             'group'             => strtolower(ChannelGroup::getName($this->member_group)),
             'is_joined'         => (bool) ($this->is_joined == YesOrNo::YES),
             'sub_communities'   => !is_null($this->joinedSubCommunities) ? ArchivedSubCommunityResource::collection($this->joinedSubCommunities) : []

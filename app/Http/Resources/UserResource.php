@@ -24,7 +24,7 @@ class UserResource extends JsonResource
             'work_id'                       => $this->work_id,
             'company'                       => $this->company,
             'token'                         => $this->when(isset($this->token), $this->token),
-            'profile_image'                 => $this->profile_image == null ? asset('admin/images/profile.png') : asset('storage/' . $this->profile_image),
+            'profile_image'                 => $this->profile_image == null ? asset('admin/images/profile.png') : url('storage/app/' . $this->profile_image),
             'device_token'                  => $this->device_token,
             'is_joined'                     => $this->whenPivotLoaded('channels_members', function () {
                                                    return strtolower(YesOrNo::getName($this->pivot->is_joined));

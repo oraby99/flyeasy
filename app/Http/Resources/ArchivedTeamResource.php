@@ -18,7 +18,7 @@ class ArchivedTeamResource extends JsonResource
         return [
             'id'                => $this->channel->id,
             'name'              => $this->channel->name,
-            'logo'              => $this->channel->logo == null ? asset('admin/images/OIG__36_-removebg.png') : asset('storage/' . $this->channel->logo),
+            'logo'              => $this->channel->logo == null ? asset('admin/images/OIG__36_-removebg.png') : url('storage/app/' . $this->channel->logo),
             'group'             => strtolower(ChannelGroup::getName($this->member_group)),
             'members_count'     => $this->members->count(),
             'communities'       => !is_null($this->joinedCommunities) ? ArchivedCommunityResource::collection($this->joinedCommunities) : []

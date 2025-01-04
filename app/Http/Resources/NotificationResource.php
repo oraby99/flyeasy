@@ -25,8 +25,8 @@ class NotificationResource extends JsonResource
             'username'      => $this->username,
             'chat_user_id'  => $this->chat_user_id,
             'Channelname'   => optional($this->channel)->name,
-            'profile_image' => $this->profile_image == null ? asset('admin/images/profile.png') : asset('storage/' . $this->profile_image),
-            'channel_image' => optional($this->channel)->channel_image == null ? asset('admin/images/OIG__36_-removebg.png') : asset('storage/' . optional($this->channel)->channel_image),
+            'profile_image' => $this->profile_image == null ? asset('admin/images/profile.png') : url('storage/app/' . $this->profile_image),
+            'channel_image' => optional($this->channel)->channel_image == null ? asset('admin/images/OIG__36_-removebg.png') : url('storage/app/' . optional($this->channel)->channel_image),
             'message'       => $this->message,
             'created_at'    => $this->created_at->format('Y-m-d H:i:s'),
         ];

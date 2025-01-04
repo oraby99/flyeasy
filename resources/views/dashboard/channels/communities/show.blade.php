@@ -63,7 +63,7 @@
                                         <img
                                             src="
                                                 @if($channel->logo != null)
-                                                    {{ asset('storage/' . $channel->logo) }}
+                                                    {{ url('storage/app/' . $channel->logo) }}
                                                 @else
                                                     {{ asset('admin/images/channel.jpeg') }}
                                                 @endif

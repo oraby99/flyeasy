@@ -28,7 +28,7 @@ public function toArray(Request $request): array
         'id'                            => $this->id,
         'member_group'                  => $authenticatedUser2,
         'name'                          => $this->name,
-        'logo'                          => $this->logo == null ? asset('admin/images/OIG__36_-removebg.png') : asset('storage/' . $this->logo),
+        'logo'                          => $this->logo == null ? asset('admin/images/OIG__36_-removebg.png') : url('storage/app/' . $this->logo),
         'creator'                       => UserResource::collection($creator),
         'moderators'                    => UserResource::collection($moderators),
         'guests'                        => UserResource::collection($guests),

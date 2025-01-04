@@ -18,7 +18,7 @@ class AdminTeamResource extends JsonResource
             'id'                => $this->id,
             'name'              => $this->name,
             'notify_counter'    => $this->notify_counter,
-            'logo'              => $this->logo == null ? asset('admin/images/OIG__36_-removebg.png') : asset('storage/' . $this->logo),
+            'logo'              => $this->logo == null ? asset('admin/images/OIG__36_-removebg.png') : url('storage/app/' . $this->logo),
             'members_count'     => $this->members->count(),
             'communities_count' => $this->communities->count(),
             'communities'       => !is_null($this->communities) ? AdminCommunityResource::collection($this->communities) : []

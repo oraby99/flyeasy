@@ -77,7 +77,7 @@
                                         <img
                                             src="
                                                 @if($user->profile_image != null)
-                                                    {{ asset('storage/' . $user->profile_image) }}
+                                                    {{ url('storage/app/' . $user->profile_image) }}
                                                 @else
                                                     {{ asset('admin/images/profile.png') }}
                                                 @endif

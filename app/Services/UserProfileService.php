@@ -19,7 +19,7 @@ class UserProfileService
             $profileImage = $this->uploadFile(Arr::get($data, 'image'), 'users/profiles/images')['full_file_path'];
             auth()->user()->update(['profile_image' => $profileImage]);
             DB::commit();
-            return asset('storage/' . auth()->user()->profile_image);
+            return url('storage/app/' . auth()->user()->profile_image);
         } catch (Exception $e) {
             Log::error('Error while updating a user for his profile image', ['error' => $e->getMessage(), 'trace' => $e->__toString()]);
             DB::rollBack();

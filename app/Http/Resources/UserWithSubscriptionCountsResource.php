@@ -20,7 +20,7 @@ class UserWithSubscriptionCountsResource extends JsonResource
             'email'         => $this->email,
             'phone'         => $this->phone,
             'token'         => $this->when(isset($this->token), $this->token),
-            'profile_image' => $this->profile_image == null ? asset('admin/images/profile.png') : asset('storage/' . $this->profile_image),
+            'profile_image' => $this->profile_image == null ? asset('admin/images/profile.png') : url('storage/app/' . $this->profile_image),
             'device_token'  => $this->device_token
         ];
     }

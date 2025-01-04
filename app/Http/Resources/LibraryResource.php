@@ -16,7 +16,7 @@ class LibraryResource extends JsonResource
     {
         return [
             'id'                => $this->id,
-            'full_file_path'    => asset('storage/' . $this->full_file_path),
+            'full_file_path'    => url('storage/app/' . $this->full_file_path),
             'file_path'         => $this->file_path,
             'file_name'         => $this->file_name,
             'file_extension'    => $this->file_extension,

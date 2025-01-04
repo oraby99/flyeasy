@@ -19,7 +19,7 @@ class ArchivedSubCommunityResource extends JsonResource
         return [
             'id'        => $this->channel->id,
             'name'      => $this->channel->name,
-            'logo'      => $this->channel->logo == null ? asset('admin/images/OIG__36_-removebg.png') : asset('storage/' . $this->channel->logo),
+            'logo'      => $this->channel->logo == null ? asset('admin/images/OIG__36_-removebg.png') : url('storage/app/' . $this->channel->logo),
             'group'     => strtolower(ChannelGroup::getName($this->member_group)),
             'is_joined' => (bool) ($this->is_joined == YesOrNo::YES)
         ];

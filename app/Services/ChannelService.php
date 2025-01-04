@@ -302,7 +302,7 @@ class ChannelService extends Service
     {
         $pathInfo = pathinfo($channel->logo);
         $newFilename = 'channels/logos/' . $pathInfo['filename'] . '_copy_' . $channel->copied_count + 1 . '.' . $pathInfo['extension'];
-        copy('storage/' . $channel->logo, 'storage/' . $newFilename);
+        copy('storage/app/' . $channel->logo, 'storage/app/' . $newFilename);
     }
 
     public function getModeratorsGuests($channel)

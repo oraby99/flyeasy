@@ -19,7 +19,7 @@ class UserMemberResource extends JsonResource
             'name'          => $this->user->name,
             'email'         => $this->user->email,
             'phone'         => $this->user->phone,
-            'profile_image' => $this->user->profile_image == null ? asset('admin/images/profile.png') : asset('storage/' . $this->user->profile_image),
+            'profile_image' => $this->user->profile_image == null ? asset('admin/images/profile.png') : url('storage/app/' . $this->user->profile_image),
             'device_token'  => $this->user->device_token
         ];
     }
