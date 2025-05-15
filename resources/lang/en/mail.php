@@ -4,9 +4,9 @@ return [
 
     'registration-verification' => [
 
-        'title'                     => 'Your Registration verification code - Fly Easy',
+        'title'                     => 'Your Registration verification code - Teams Layered',
 
-        'alt-logo'                  => 'Fly Easy',
+        'alt-logo'                  => 'Teams Layered',
 
         'verification-code-title'   => 'Here is your verification code : ',
 
