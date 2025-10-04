@@ -24,7 +24,7 @@ class UserMemberService extends Service
     
             $channels = ChannelMember::pluck('channel_id');
     
-            return ChannelMember::whereIn('channel_id', $channels)
+            $dataResult =  ChannelMember::whereIn('channel_id', $channels)
                     ->where('member_id', '!=', auth()->id())
                     ->when($ignoredMemberId, function ($q) use ($ignoredMemberId) {
                         return $q->where('member_id', '!=', $ignoredMemberId);
@@ -39,6 +39,18 @@ class UserMemberService extends Service
                     })
                     ->groupBy('member_id')
                     ->paginate(self::PERPAGE);
+            if($dataResult->isEmpty()) {
+                // Search on users table if no results found in channel members
+                $dataResult = \App\Models\User::where('id', '!=', auth()->id())->where(function ($query) use ($search) {
+                        $query->where('users.name', 'like', '%' . $search . '%')
+                            ->orWhere('users.email', 'like', '%' . $search . '%')
+                            ->orWhere('users.work_id', 'like', '%' . $search . '%')
+                            ->orWhere('users.phone', 'like', '%' . $search . '%');
+                    })
+                    ->paginate(self::PERPAGE);    
+                                
+            }
+            return $dataResult;
                     
         } catch (Exception $e) {
             Log::error('Error while getting all channels for authenticated user', [

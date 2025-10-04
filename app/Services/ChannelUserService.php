@@ -128,6 +128,7 @@ class ChannelUserService extends Service
                     'chat_users.id as chat_user_id',
                     'users.id as user_id',
                     'users.name',
+                    'users.phone',
                     'users.profile_image',
                     'chat_users.notify_counter',
                     'chat_users.counter',
