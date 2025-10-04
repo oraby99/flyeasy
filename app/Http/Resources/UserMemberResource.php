@@ -13,14 +13,15 @@ class UserMemberResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {
+    { 
+        $profileImage = $this->user->profile_image ?? $this->profile_image;
         return [
-            'id'            => $this->user->id,
-            'name'          => $this->user->name,
-            'email'         => $this->user->email,
-            'phone'         => $this->user->phone,
-            'profile_image' => $this->user->profile_image == null ? asset('admin/images/profile.png') : url('storage/app/' . $this->user->profile_image),
-            'device_token'  => $this->user->device_token
+            'id'            => $this->user->id ?? $this->id,
+            'name'          => $this->user->name ?? $this->name,
+            'email'         => $this->user->email ?? $this->email,
+            'phone'         => $this->user->phone ?? $this->phone,
+            'profile_image' => $profileImage ? asset('storage/'.$profileImage) : null,
+            'device_token'  => $this->user->device_token ?? $this->device_token,
         ];
     }
 }
