@@ -31,13 +31,15 @@ class DeleteChannelJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+   public function handle(): void
     {
         DB::beginTransaction();
         try {
-            if(!is_null($this->channel->logo))
-                $this->deleteFile(Arr::get($this->channel->logo, 'logo'));
-
+            $logoData = json_decode($this->channel->logo, true);
+            $path = Arr::get($logoData, 'logo');
+            if (!empty($path)) {
+                $this->deleteFile($path);
+            }
             $this->channel->delete();
             DB::commit();
         } catch (Exception $e) {

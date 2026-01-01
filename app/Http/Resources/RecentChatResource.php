@@ -19,6 +19,7 @@ class RecentChatResource extends JsonResource
             'user_id'        => $this->user_id,
             'name'           => $this->name,
             'notify_counter' => $this->notify_counter,
+            'phone'         => $this->phone, 
             'counter'        => $this->counter,
             'profile_image'  => $this->profile_image == null ? asset('admin/images/profile.png') : url('storage/app/' . $this->profile_image)
         ];
