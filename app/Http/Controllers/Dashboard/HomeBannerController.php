@@ -16,7 +16,7 @@ class HomeBannerController extends Controller
 
     public function create()
     {
-        return view('dashboard.banners.create');
+        return view('dashboard.homebanner.create');
     }
 
     public function store(Request $request)
@@ -33,12 +33,12 @@ class HomeBannerController extends Controller
             'image_path' => $path,
         ]);
 
-        return redirect()->route('dashboard.banners.index')->with('success', 'Banner created successfully.');
+        return redirect()->route('dashboard.HomeBanners.index')->with('success', 'Banner created successfully.');
     }
 
     public function edit(HomeBanner $banner)
     {
-        return view('dashboard.banners.edit', compact('banner'));
+        return view('dashboard.homebanner.edit', compact('banner'));
     }
 
     public function update(Request $request, HomeBanner $banner)
@@ -55,12 +55,21 @@ class HomeBannerController extends Controller
 
         $banner->update(['title' => $validated['title']]);
 
-        return redirect()->route('dashboard.banners.index')->with('success', 'Banner updated successfully.');
+        return redirect()->route('dashboard.HomeBanners.index')->with('success', 'Banner updated successfully.');
     }
 
     public function destroy(HomeBanner $banner)
     {
         $banner->delete();
-        return redirect()->route('dashboard.banners.index')->with('success', 'Banner deleted successfully.');
+        return redirect()->route('dashboard.HomeBanners.index')->with('success', 'Banner deleted successfully.');
+    }
+
+    public function getBannerImage()
+    {
+        $banners = HomeBanner::all()->map(function ($banner) {
+            return asset('storage/' . $banner->image_path);
+        });
+
+        return response()->json($banners);
     }
 }

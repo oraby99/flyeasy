@@ -24,6 +24,8 @@ Route::controller('AuthController')->group(function () {
 
 });
 
+Route::get('home-banners', [\App\Http\Controllers\Dashboard\HomeBannerController::class, 'getBannerImage']);
+
 Route::middleware(['auth:sanctum', 'isPass'])->group(function () {
 
     Route::name('channels.')->prefix('channels')->group(function () {
@@ -118,21 +120,21 @@ Route::middleware(['auth:sanctum', 'isPass'])->group(function () {
 
     Route::controller('NotificationController')->name('notification.')->prefix('notification')->group(function () {
 
-        Route::post('user-notification',  'usernotification')->name('usernotification');
+        Route::post('user-notification', 'usernotification')->name('usernotification');
 
-        Route::post('chanel-notification/{channel}','chanelnotification')->name('chanelnotification');
+        Route::post('chanel-notification/{channel}', 'chanelnotification')->name('chanelnotification');
 
-        Route::get('notifications',       'index')->name('index');
+        Route::get('notifications', 'index')->name('index');
 
-        Route::get('notificationCounter',  'notificationCounter')->name('notificationCounter');
+        Route::get('notificationCounter', 'notificationCounter')->name('notificationCounter');
 
-        Route::post('reset-user-notification/{id}',  'resetusernotification')->name('resetusernotification');
+        Route::post('reset-user-notification/{id}', 'resetusernotification')->name('resetusernotification');
 
-        Route::post('resetnotification',  'resetnotification')->name('resetnotification');
+        Route::post('resetnotification', 'resetnotification')->name('resetnotification');
 
-        Route::post('reset-chanel-notification/{id}',  'resetchanelnotification')->name('resetchanelnotification');
+        Route::post('reset-chanel-notification/{id}', 'resetchanelnotification')->name('resetchanelnotification');
 
-        Route::post('delete-notification/{id}',  'deletenotification')->name('deletenotification');
+        Route::post('delete-notification/{id}', 'deletenotification')->name('deletenotification');
 
 
     });

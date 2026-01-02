@@ -118,14 +118,14 @@
                 {{ __('dashboard.settings.title') }}
             </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link @if(request()->is('dashboard/banners')) active @endif" href="{{ route('dashboard.banners.index') }}">
                 <svg class="nav-icon">
                     <use xlink:href="{{ asset('admin/images/free.svg') }}#cil-image"></use>
                 </svg>
                 {{ __('dashboard.banners.title') }}
             </a>
-        </li>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link @if(request()->is('dashboard/HomeBanners')) active @endif" href="{{ route('dashboard.HomeBanners.index') }}">
                 <svg class="nav-icon">

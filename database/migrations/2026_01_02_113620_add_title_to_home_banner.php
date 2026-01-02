@@ -10,10 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('home_banners', function (Blueprint $table) {
-            $table->id();
-            $table->string('image_path');
-            $table->timestamps();
+        Schema::table('home_banners', function (Blueprint $table) {
+            //
+            $table->string('title');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('home_banners');
+        Schema::table('home_banner', function (Blueprint $table) {
+            //
+        });
     }
 };

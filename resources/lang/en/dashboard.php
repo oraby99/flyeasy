@@ -2,93 +2,93 @@
 
 return [
 
-    'title'             => 'Fly Easy Dashboard',
+    'title' => 'Fly Easy Dashboard',
 
-    'teams-page'         => 'Main Page',
+    'teams-page' => 'Main Page',
 
-    'name'              => 'Name',
+    'name' => 'Name',
 
-    'email'             => 'Email',
+    'email' => 'Email',
 
-    'phone'             => 'Phone',
+    'phone' => 'Phone',
 
-    'status'            => 'Status',
+    'status' => 'Status',
 
-    'is_verified'       => 'Is Verified ?',
+    'is_verified' => 'Is Verified ?',
 
-    'members_count'     => 'Members Count',
+    'members_count' => 'Members Count',
 
-    'options'           => 'Options',
+    'options' => 'Options',
 
-    'basic-info'        => 'Basic Info',
+    'basic-info' => 'Basic Info',
 
-    'update'            => 'Update',
+    'update' => 'Update',
 
-    'success-updated'   => 'Updating done successfully',
+    'success-updated' => 'Updating done successfully',
 
-    'success-created'   => 'Creating done successfully',
+    'success-created' => 'Creating done successfully',
 
-    'success-deleted'   => 'Deleting done successfully',
+    'success-deleted' => 'Deleting done successfully',
 
-    'active'            => 'Active',
+    'active' => 'Active',
 
-    'nonactive'         => 'Non Active',
+    'nonactive' => 'Non Active',
 
-    'profile-image'     => 'Profile Image',
+    'profile-image' => 'Profile Image',
 
-    'logo'              => 'Logo',
+    'logo' => 'Logo',
 
-    'unlimited'         => 'Un Limited',
+    'unlimited' => 'Un Limited',
 
-    'free'              => 'Free',
+    'free' => 'Free',
 
-    'channels-count'    => 'Channels Count',
+    'channels-count' => 'Channels Count',
 
-    'members-count'     => 'Members Count',
+    'members-count' => 'Members Count',
 
-    'price'             => 'Price',
+    'price' => 'Price',
 
-    'user'              => 'User',
+    'user' => 'User',
 
-    'plan-name'         => 'Plan',
+    'plan-name' => 'Plan',
 
-    'type'              => 'Type',
+    'type' => 'Type',
 
-    'count'             => 'Count',
+    'count' => 'Count',
 
-    'create'            => 'Create',
+    'create' => 'Create',
 
-    'store'             => 'Store',
+    'store' => 'Store',
 
-    'discount'          => 'Discount',
+    'discount' => 'Discount',
 
-    'extension'         => 'Extension',
+    'extension' => 'Extension',
 
-    'are_you_sure'      => 'Are you sure ?',
+    'are_you_sure' => 'Are you sure ?',
 
-    'close'             => 'Close',
+    'close' => 'Close',
 
-    'delete'            => 'Delete',
+    'delete' => 'Delete',
 
-    'work_id'          => 'Work id',
+    'work_id' => 'Work id',
 
-    'company'          => 'Company',
+    'company' => 'Company',
 
-    'payment-method'    => 'Payment Method',
+    'payment-method' => 'Payment Method',
 
-    'currency'          => 'Currency',
+    'currency' => 'Currency',
 
-    'num-of-months'     => 'Num Of Months',
+    'num-of-months' => 'Num Of Months',
 
-    'num-of-sections'   => 'Num Of Sections',
+    'num-of-sections' => 'Num Of Sections',
 
-    'section'           => 'Section',
+    'section' => 'Section',
 
-    'header'    => [
+    'header' => [
 
-        'settings'  => 'Settings',
+        'settings' => 'Settings',
 
-        'logout'    => 'Logout'
+        'logout' => 'Logout'
 
     ],
 
@@ -96,7 +96,7 @@ return [
 
         'title' => 'Users',
 
-        'edit'  => [
+        'edit' => [
 
             'discount-placeholder' => '--- Enter discount ---'
 
@@ -106,25 +106,25 @@ return [
 
     'channels' => [
 
-        'title'             => 'Channels',
+        'title' => 'Channels',
 
-        'teams'             => 'Teams',
+        'teams' => 'Teams',
 
-        'communities'       => 'Communities',
+        'communities' => 'Communities',
 
-        'sub-communities'   => 'Sub Communities',
+        'sub-communities' => 'Sub Communities',
 
-        'members'           => 'Members'
+        'members' => 'Members'
 
     ],
 
-    'plans'     => [
+    'plans' => [
 
         'title' => 'Plans',
 
-        'edit'  => [
+        'edit' => [
 
-            'name-placeholder'  => '--- Enter plan name ---',
+            'name-placeholder' => '--- Enter plan name ---',
 
             'count-placeholder' => '--- Enter count ---',
 
@@ -144,33 +144,33 @@ return [
 
     'settings' => [
 
-        'title'                             => 'Settings',
+        'title' => 'Settings',
 
-        'free-teams'                        => 'Free Teams',
+        'free-teams' => 'Free Teams',
 
-        'free-teams-placeholder'            => '--- Enter free teams ---',
+        'free-teams-placeholder' => '--- Enter free teams ---',
 
-        'free-communities'                  => 'Free Communities',
+        'free-communities' => 'Free Communities',
 
-        'free-communities-placeholder'      => '--- Enter free communities ---',
+        'free-communities-placeholder' => '--- Enter free communities ---',
 
-        'free-sub-communities'              => 'Free Sub Communities',
+        'free-sub-communities' => 'Free Sub Communities',
 
-        'free-sub-communities-placeholder'  => '--- Enter free sub communities ---',
+        'free-sub-communities-placeholder' => '--- Enter free sub communities ---',
 
-        'free-members'                      => 'Free Members',
+        'free-members' => 'Free Members',
 
-        'free-members-placeholder'          => '--- Enter free members ---'
+        'free-members-placeholder' => '--- Enter free members ---'
 
     ],
 
     'library' => [
 
-        'title'     => 'Library',
+        'title' => 'Library',
 
-        'sections'  => [
+        'sections' => [
 
-            'title'     => 'Sections',
+            'title' => 'Sections',
 
             'create' => [
 
@@ -208,7 +208,11 @@ return [
 
     'HomeBanners' => [
 
-        'title' => 'HomeBanners'
+        'title' => 'Home Banners',
+
+        'banner_title' => 'Banner Title',
+
+        'image' => 'Banner Image',
 
     ]
 
