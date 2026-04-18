@@ -6,6 +6,7 @@ use App\Jobs\handleJoiningMembersInChannelsJob;
 use App\Jobs\DeleteChannelMembersJob;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Traits\UploadFilesTrait;
 use App\Jobs\DeleteChannelJob;
 use App\Models\ChannelMember;
@@ -301,8 +302,8 @@ class ChannelService extends Service
     private function copyChannelLogo($channel): void
     {
         $pathInfo = pathinfo($channel->logo);
-        $newFilename = 'channels/logos/' . $pathInfo['filename'] . '_copy_' . $channel->copied_count + 1 . '.' . $pathInfo['extension'];
-        copy('storage/app/' . $channel->logo, 'storage/app/' . $newFilename);
+        $newFilename = 'channels/logos/' . $pathInfo['filename'] . '_copy_' . ($channel->copied_count + 1) . '.' . $pathInfo['extension'];
+        Storage::disk('public')->copy($channel->logo, $newFilename);
     }
 
     public function getModeratorsGuests($channel)

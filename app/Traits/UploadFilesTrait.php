@@ -11,7 +11,7 @@ trait UploadFilesTrait
     {
         $randomString   = Str::slug(Str::random(10));
         $fileName       = $randomString . '-' . time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs($path, $fileName);
+        $file->storeAs($path, $fileName, 'public');
 
         return [
             'full_file_path'    => $path . '/' . $fileName,
@@ -25,6 +25,6 @@ trait UploadFilesTrait
 
     public function deleteFile($file): void
     {
-        Storage::delete($file);
+        Storage::disk('public')->delete($file);
     }
 }
