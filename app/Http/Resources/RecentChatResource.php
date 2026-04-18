@@ -15,13 +15,14 @@ class RecentChatResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'chat_user_id'   => $this->chat_user_id,
-            'user_id'        => $this->user_id,
-            'name'           => $this->name,
+            'chat_user_id' => $this->chat_user_id,
+            'user_id' => $this->user_id,
+            'name' => $this->name,
+            'email' => $this->email,
             'notify_counter' => $this->notify_counter,
-            'phone'         => $this->phone, 
-            'counter'        => $this->counter,
-            'profile_image'  => $this->profile_image == null ? asset('admin/images/profile.png') : asset('storage/' . $this->profile_image)
+            'phone' => $this->phone,
+            'counter' => $this->counter,
+            'profile_image' => $this->profile_image == null ? asset('admin/images/profile.png') : asset('storage/' . $this->profile_image)
         ];
     }
 }
