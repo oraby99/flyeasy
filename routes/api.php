@@ -18,13 +18,33 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/storage-check', function () {
+Route::get('/storage-check', function (Request $request) {
+    if ($request->has('fix')) {
+        $target = storage_path('app/public');
+        $shortcut = public_path('storage');
+
+        if (file_exists($shortcut)) {
+            if (is_link($shortcut) || is_dir($shortcut)) {
+                // Try to delete existing broken link/folder
+                @rename($shortcut, $shortcut . '_bak_' . time());
+            }
+        }
+
+        try {
+            symlink($target, $shortcut);
+            $fixStatus = "Symlink created successfully from $target to $shortcut";
+        } catch (\Exception $e) {
+            $fixStatus = "Failed to create symlink: " . $e->getMessage();
+        }
+    }
+
     $results = [
         'public_storage_exists' => file_exists(public_path('storage')),
         'public_storage_is_link' => is_link(public_path('storage')),
         'storage_app_public_exists' => file_exists(storage_path('app/public')),
         'app_url' => config('app.url'),
         'storage_url_config' => config('filesystems.disks.public.url'),
+        'fix_status' => $fixStatus ?? 'None',
     ];
 
     // Try to create a test file
