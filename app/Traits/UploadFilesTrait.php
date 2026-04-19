@@ -11,7 +11,11 @@ trait UploadFilesTrait
     {
         $randomString   = Str::slug(Str::random(10));
         $fileName       = $randomString . '-' . time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs($path, $fileName, 'public');
+        $storedPath     = $file->storeAs($path, $fileName, 'public');
+
+        if (!$storedPath) {
+            throw new \Exception("Failed to store the uploaded file at: " . $path);
+        }
 
         return [
             'full_file_path'    => $path . '/' . $fileName,

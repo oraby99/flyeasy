@@ -17,7 +17,7 @@ class AdminCommunityResource extends JsonResource
         return [
             'id'                => $this->id,
             'name'              => $this->name,
-            'logo'              => $this->logo == null ? asset('admin/images/OIG__36_-removebg.png') : asset('storage/' . $this->logo),
+            'logo'              => $this->logo == null ? asset('admin/images/OIG__36_-removebg.png') : \Illuminate\Support\Facades\Storage::disk('public')->url($this->logo),
             'sub_communities'   => !is_null($this->subCommunities) ? AdminSubCommunityResource::collection($this->subCommunities) : []
         ];
     }

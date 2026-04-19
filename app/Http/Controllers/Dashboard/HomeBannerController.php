@@ -67,7 +67,7 @@ class HomeBannerController extends Controller
     public function getBannerImage()
     {
         $banners = HomeBanner::all()->map(function ($banner) {
-            return asset('storage/' . $banner->image_path);
+            return \Illuminate\Support\Facades\Storage::disk('public')->url($banner->image_path);
         });
 
         return response()->json($banners);

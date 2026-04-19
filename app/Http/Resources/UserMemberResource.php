@@ -20,7 +20,7 @@ class UserMemberResource extends JsonResource
             'name'          => $this->user->name ?? $this->name,
             'email'         => $this->user->email ?? $this->email,
             'phone'         => $this->user->phone ?? $this->phone,
-            'profile_image' => $profileImage ? asset('storage/'.$profileImage) : null,
+            'profile_image' => $profileImage ? \Illuminate\Support\Facades\Storage::disk('public')->url($profileImage) : null,
             'device_token'  => $this->user->device_token ?? $this->device_token,
         ];
     }
