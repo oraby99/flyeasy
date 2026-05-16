@@ -221,6 +221,30 @@ class NotificationController extends Controller
         return $this->failed();
     }
 
+    public function resetchanelnotification($id)
+    {
+        $channel = Channel::find($id);
+
+        if ($channel) {
+            $channel->update(['notify_counter' => 0]);
+            return $this->success();
+        }
+
+        return $this->modelNotFound();
+    }
+
+    public function resetusernotification($id)
+    {
+        $chatUser = ChatUser::find($id);
+
+        if ($chatUser) {
+            $chatUser->update(['notify_counter' => 0, 'counter' => 0]);
+            return $this->success();
+        }
+
+        return $this->modelNotFound();
+    }
+
     public function deletenotification($id)
     {
         $notification = Notification::find($id);
