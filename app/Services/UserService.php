@@ -39,24 +39,59 @@ class UserService extends Service
         $search = Arr::get($searchData, 'search', '');
     
         // Return an empty collection if search is not provided or is empty
-        if (empty($search)) {
-            return collect([]); // You can also return paginate([]) if needed for pagination
+        if (!isset($search) || $search === '') {
+            return collect([]);
         }
     
-        return User::where(function ($q) use ($search) {
-                            $q->where('name', 'like', '%' . $search . '%')
-                              ->orWhere('email', 'like', '%' . $search . '%')
-                              ->orWhere('phone', 'like', '%' . $search . '%');
-                        })
-                    ->where(function ($q) {
-                        $q->where([
-                                'status' => ActivationStatus::ACTIVE,
-                                'group'  => UserGroup::USER
-                            ])
-                            ->where('id', '!=', auth()->id())
-                            ->whereNotNull('email_verified_at');
-                    })
-                    ->paginate(self::PERPAGE);
+        // Split search term into keywords for multi-word search
+        $keywords = explode(' ', $search);
+
+        return User::query() // Removed auth id exclusion
+            ->where(function ($q) use ($search, $keywords) {
+                // Try to match the full string literally
+                $q->where(function($full) use ($search) {
+                    $full->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('email', 'like', '%' . $search . '%')
+                        ->orWhere('phone', 'like', '%' . $search . '%')
+                        ->orWhere('country_code', 'like', '%' . $search . '%');
+                });
+
+                // OR match all keywords
+                $q->orWhere(function ($andQ) use ($keywords) {
+                    foreach ($keywords as $keyword) {
+                        if (empty($keyword)) continue;
+                        $cleanKeyword = preg_replace('/[^0-9]/', '', $keyword);
+                        
+                        $andQ->where(function ($orQ) use ($keyword, $cleanKeyword) {
+                            $orQ->where('name', 'like', '%' . $keyword . '%')
+                                ->orWhere('email', 'like', '%' . $keyword . '%')
+                                ->orWhere('phone', 'like', '%' . $keyword . '%')
+                                ->orWhere('country_code', 'like', '%' . $keyword . '%')
+                                ->orWhere('id', 'like', '%' . $keyword . '%');
+
+                            if (!empty($cleanKeyword)) {
+                                $orQ->orWhere(DB::raw("REGEXP_REPLACE(CONCAT(IFNULL(country_code, ''), IFNULL(phone, '')), '[^0-9]', '')"), 'like', '%' . $cleanKeyword . '%')
+                                   ->orWhere(DB::raw("REGEXP_REPLACE(IFNULL(phone, ''), '[^0-9]', '')"), 'like', '%' . $cleanKeyword . '%');
+                            }
+                        });
+                    }
+                });
+            })
+            ->where(function ($q) use ($search) {
+                $q->where([
+                        'status' => ActivationStatus::ACTIVE,
+                        'group'  => UserGroup::USER
+                    ]);
+            })
+            ->orderByRaw("
+                CASE 
+                    WHEN name LIKE ? THEN 1
+                    WHEN phone LIKE ? THEN 2
+                    WHEN country_code LIKE ? THEN 2
+                    ELSE 3 
+                END
+            ", [$search . '%', $search . '%', $search . '%'])
+            ->paginate(self::PERPAGE);
     }
     
 }

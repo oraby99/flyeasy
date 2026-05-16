@@ -19,12 +19,12 @@ class UserMemberController extends Controller
 
     public function getRelated(Request $request): JsonResponse
     {
-        if($members = $this->UserMemberService->all($request->all()))
-            $ids = [];
-            foreach ($members as $member) {
-                $ids[] = $member['id'];
-            }
+        $members = $this->UserMemberService->all($request->all());
+        
+        if ($members) {
             return $this->success(UserMemberResource::collection($members));
+        }
+
         return $this->failed();
     }
 }

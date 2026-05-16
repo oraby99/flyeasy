@@ -7,6 +7,10 @@ use App\Models\ChannelMember;
 use Illuminate\Support\Arr;
 use App\Enums\ChannelLevel;
 use App\Enums\YesOrNo;
+use App\Enums\ActivationStatus;
+use App\Enums\UserGroup;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class UserMemberService extends Service
@@ -18,39 +22,64 @@ class UserMemberService extends Service
             $search = Arr::get($data, 'search');
     
             // Return empty collection if no search key is provided
-            if (empty($search)) {
-                return collect([]); // Or return a paginated empty array if required
+            if (!isset($search) || $search === '') {
+                return collect([]);
             }
+
+            // Split search term into keywords for multi-word search
+            $keywords = explode(' ', $search);
     
-            $channels = ChannelMember::pluck('channel_id');
-    
-            $dataResult =  ChannelMember::whereIn('channel_id', $channels)
-                    ->where('member_id', '!=', auth()->id())
-                    ->when($ignoredMemberId, function ($q) use ($ignoredMemberId) {
-                        return $q->where('member_id', '!=', $ignoredMemberId);
-                    })
-                    ->whereHas('user', function ($q) use ($search) {
-                        return $q->where(function ($query) use ($search) {
-                            $query->where('users.name', 'like', '%' . $search . '%')
-                                ->orWhere('users.email', 'like', '%' . $search . '%')
-                                ->orWhere('users.work_id', 'like', '%' . $search . '%')
-                                ->orWhere('users.phone', 'like', '%' . $search . '%');
-                        });
-                    })
-                    ->groupBy('member_id')
-                    ->paginate(self::PERPAGE);
-            if($dataResult->isEmpty()) {
-                // Search on users table if no results found in channel members
-                $dataResult = \App\Models\User::where('id', '!=', auth()->id())->where(function ($query) use ($search) {
-                        $query->where('users.name', 'like', '%' . $search . '%')
-                            ->orWhere('users.email', 'like', '%' . $search . '%')
-                            ->orWhere('users.work_id', 'like', '%' . $search . '%')
-                            ->orWhere('users.phone', 'like', '%' . $search . '%');
-                    })
-                    ->paginate(self::PERPAGE);    
-                                
+            $query = User::query() // Removed auth id exclusion
+                ->where(function ($q) use ($search, $keywords) {
+                    // Try to match the full string literally across main columns
+                    $q->where(function($full) use ($search) {
+                        $full->where('name', 'like', '%' . $search . '%')
+                            ->orWhere('email', 'like', '%' . $search . '%')
+                            ->orWhere('phone', 'like', '%' . $search . '%')
+                            ->orWhere('country_code', 'like', '%' . $search . '%');
+                    });
+
+                    // OR match all keywords across any column
+                    $q->orWhere(function ($andQ) use ($keywords) {
+                        foreach ($keywords as $keyword) {
+                            if (empty($keyword)) continue;
+                            $cleanKeyword = preg_replace('/[^0-9]/', '', $keyword);
+                            
+                            $andQ->where(function ($orQ) use ($keyword, $cleanKeyword) {
+                                $orQ->where('name', 'like', '%' . $keyword . '%')
+                                    ->orWhere('email', 'like', '%' . $keyword . '%')
+                                    ->orWhere('work_id', 'like', '%' . $keyword . '%')
+                                    ->orWhere('phone', 'like', '%' . $keyword . '%')
+                                    ->orWhere('country_code', 'like', '%' . $keyword . '%')
+                                    ->orWhere('company', 'like', '%' . $keyword . '%')
+                                    ->orWhere('id', 'like', '%' . $keyword . '%');
+
+                                if (!empty($cleanKeyword)) {
+                                    $orQ->orWhere(DB::raw("REGEXP_REPLACE(CONCAT(IFNULL(country_code, ''), IFNULL(phone, '')), '[^0-9]', '')"), 'like', '%' . $cleanKeyword . '%')
+                                       ->orWhere(DB::raw("REGEXP_REPLACE(IFNULL(phone, ''), '[^0-9]', '')"), 'like', '%' . $cleanKeyword . '%');
+                                }
+                            });
+                        }
+                    });
+                })
+                ->where('status', ActivationStatus::ACTIVE)
+                ->where('group', UserGroup::USER);
+
+            // Priority ordering: Starts with > Contains
+            $query->orderByRaw("
+                CASE 
+                    WHEN name LIKE ? THEN 1
+                    WHEN phone LIKE ? THEN 2
+                    WHEN country_code LIKE ? THEN 2
+                    ELSE 3 
+                END
+            ", [$search . '%', $search . '%', $search . '%']);
+
+            if ($ignoredMemberId) {
+                $query->where('id', '!=', $ignoredMemberId);
             }
-            return $dataResult;
+
+            return $query->paginate(self::PERPAGE);
                     
         } catch (Exception $e) {
             Log::error('Error while getting all channels for authenticated user', [
